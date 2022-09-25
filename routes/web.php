@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,13 +18,42 @@ use Illuminate\Support\Facades\Route;
 //     return view('admin.forms');
 // });
 
-;
+// ;
+
+
+
+
+Route::get('/', [UserController::class, 'home'])->name('home');
+Route::get('/about', [UserController::class, 'about'])->name('about');
+
+Route::prefix('/users')->name('users.')->group(function(){
+
+
+    
+    Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
+    Route::get('/invoice', [UserController::class, 'invoice'])->name('invoice');
+
+    
+    Route::prefix('/prouct')->name('product.')->group(function(){
+        Route::get('/list', [UserController::class, 'productList'])->name('list');
+        Route::get('/detail', [UserController::class, 'productDetail'])->name('detail');
+    });
+
+    Route::get('/thank-you', [UserController::class, 'thankYou'])->name('thank-you');
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::get('/register', [UserController::class, 'register'])->name('register');
+
+
+});
+
 // Route::get('/admin/category-form',[AdminController::class, 'categoryForm'])->name('form');
 // Route::get('/admin/category-list',[AdminController::class, 'categoryList'])->name('list');
 
+// Route::get('/',[AdminController::class,'logIn'])->name('log-in');
+// Route::get('/register',[AdminController::class,'register'])->name('register');
 Route::prefix('/admin')->name('admin.')->group(function(){
 
-    Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/',[AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::prefix('/category')->name('category.')->group(function(){
         Route::get('/form',[AdminController::class, 'categoryForm'])->name('form');

@@ -21,4 +21,10 @@ class AdminController extends Controller
     public function productList(){
         return view('admin.tables');
     }
+    public function logIn(){
+        return view('login');
+    }
+    public function register(){
+        return view('register');
+    }
 }
