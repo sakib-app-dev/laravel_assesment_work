@@ -58,9 +58,17 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     Route::prefix('/category')->name('category.')->group(function(){
         Route::get('/form',[AdminController::class, 'categoryForm'])->name('form');
         Route::get('/list',[AdminController::class, 'categoryList'])->name('list');
+        Route::get('/show/{id}',[AdminController::class, 'categoryList'])->name('show');
+        Route::get('/edit',[AdminController::class, 'categoryList'])->name('edit');
+        Route::get('/delete/{id}',[AdminController::class, 'categoryList'])->name('delete');
     });
     Route::prefix('/product')->name('product.')->group(function(){
         Route::get('/form',[AdminController::class, 'productForm'])->name('form');
-        Route::get('/list',[AdminController::class, 'productList'])->name('list');
+        Route::get('/{id}/edit',[AdminController::class, 'productEditForm'])->name('edit_form');
+        Route::post('/store',[AdminController::class, 'productStore'])->name('store');
+        Route::patch('/{id}/update',[AdminController::class, 'productUpdate'])->name('update');
+        Route::get('/list',[AdminController::class, 'productList'])->name('index');
+        Route::get('/show/{id}/',[AdminController::class, 'productShow'])->name('show');
+        Route::delete('{id}/destroy',[AdminController::class, 'productDestroy'])->name('destroy');
     });
 });
