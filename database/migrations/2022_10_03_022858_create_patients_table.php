@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('address');
-            $table->integer('phone','11');
+            $table->integer('phone');
             $table->string('email');
             $table->datetime('last_visited');
             $table->string('department');
