@@ -7,11 +7,23 @@
 					<div class="row">
 						<h3 class="title1">Product Form :</h3>
 						<div class="form-three widget-shadow">
+							@if ($errors->any())
+								<div class="alert alert-danger">
+									<ul>
+										@foreach ($errors->all() as $error)
+											<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+								</div> 
+							@endif
 							<form action="{{ route('admin.product.store') }}" method="POST">
 								@csrf
 								<div class="form-group">
 								  <label for="product_title">Title</label>
-								  <input type="text" class="form-control" id="product_title" name="product_title" placeholder="Enter Product Title....">
+								  <input type="text" class="form-control" id="product_title" name="title" value="{{ old('title') }}" placeholder="Enter Product Title....">
+								  @error('title')
+								  <span class="form-text text-danger">{{ $message }}</span>
+								  @enderror
 								</div>
 								
 								<select class="form-select form-select-lg mb-3 form-control" aria-label="Default select example" name="category">

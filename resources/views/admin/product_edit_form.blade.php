@@ -2,6 +2,15 @@
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div> 
+				@endif
 				<div class="forms">
 					{{-- @dd($product->category = 'Men'); --}}
 					<div class="row">
@@ -12,7 +21,10 @@
 								@method('patch')
 								<div class="form-group">
 								  <label for="product_title">Title</label>
-								  <input type="text" class="form-control" id="product_title" name="product_title" placeholder="Enter Product Title...." value="{{ $product->title }}">
+								  <input type="text" class="form-control" id="product_title" name="product_title" placeholder="Enter Product Title...." value="{{ old('title', $product->title ) }}">
+								  @error('title')
+								  <span class="form-text text-danger">{{ $message }}</span>
+								  @enderror
 								</div>
 								{{ $product->category }}
 								<select class="form-select form-select-lg mb-3 form-control" aria-label="Default select example" name="category">
