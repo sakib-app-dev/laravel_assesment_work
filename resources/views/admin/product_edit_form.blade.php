@@ -19,6 +19,8 @@
 							<form action="{{ route('admin.product.update',$product->id) }}" method="POST">
 								@csrf
 								@method('patch')
+
+								{{--  
 								<div class="form-group">
 								  <label for="product_title">Title</label>
 								  <input type="text" class="form-control" id="product_title" name="product_title" placeholder="Enter Product Title...." value="{{ old('title', $product->title ) }}">
@@ -46,6 +48,28 @@
 								<div class="form-group">
 									<label for="description">Description</label>
 									<textarea class="form-control" name="description" id="description" cols="30" rows="4">{{ $product->description }}</textarea>
+								</div>
+
+								--}}
+								<div class="form-group">
+									
+									<x-form.input type="text" name="title" label="Product Title" value="{{ old('title', $product->title ) }}" required placeholder="Product Title...." />
+								</div>
+
+							
+								@php
+									
+									$list = ['Kids' => 'Kids', 'Men' => 'Men','Women'=>'Women'];
+								@endphp
+								<x-form.select class="form-select form-select-lg mb-3 form-control" name="category"   :list=$list />
+
+								<div class="form-check">
+								  
+								  <x-form.radio name="is_active" class="form-check-input"  type="checkbox" label="Is Active ?"/>
+								</div>
+
+								<div class="form-group">
+									<x-form.textarea name="description" class="form-control" id="" cols="30" rows="4" label="Description" text="{{ $product->description }}"/>
 								</div>
 								<button type="submit" class="btn btn-primary">Submit</button>
 							  </form>
