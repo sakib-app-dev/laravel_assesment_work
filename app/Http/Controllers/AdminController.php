@@ -24,6 +24,10 @@ class AdminController extends Controller
 
 
 
+
+
+//Product
+
     public function productForm(){
         return view('admin.product_form');
     }
@@ -44,7 +48,8 @@ class AdminController extends Controller
         //                 ->withErrors($validator)
         //                 ->withInput();
         // }else{
-
+            $request->file('image') ->move(storage_path('/app/public/products'));
+            dd($request->image);
             Product::create([
                 'title'=>$request->title,
                 'category'=>$request->category,
@@ -58,10 +63,14 @@ class AdminController extends Controller
         // } 
     }
 
+
+
     public function productEditForm($id){
         $product=Product::find($id);
         return view('admin.product_edit_form',compact('product'));
     }
+
+
 
     public function productUpdate(ProductRequest $request,$id){
        
@@ -77,15 +86,26 @@ class AdminController extends Controller
         ->route('admin.product.index')
         ->with('message','Updated Successfully...');
     }
+
+
+
     public function productList(){
         $product=Product::all();
         return view('admin.product_tables',compact('product'));
     }
+
+ 
+
+
+
     public function productShow($id){
         
         $product=Product::find($id);
         return view('admin.product-show',compact('product'));
     }
+
+
+
     public function productDestroy($id){
         
         $product=Product::find($id);
@@ -96,6 +116,23 @@ class AdminController extends Controller
     }
 
 
+
+
+    public function productTrash(){
+        $product=Product::onlyTrashed()->get();
+        return view('admin.product_trash',compact('product'));
+    }
+
+    public function productRestore($id){
+        dd($id);
+        $product=Product::onlyTrashed()->find($id);
+        $product->restore();
+        return redirect()
+        ->route('admin.product.trash')
+        ->with('message','Restore Successfully');
+    }
+
+     
     public function logIn(){
         return view('login');
     }

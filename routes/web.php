@@ -70,5 +70,14 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         Route::get('/list',[AdminController::class, 'productList'])->name('index');
         Route::get('/show/{id}/',[AdminController::class, 'productShow'])->name('show');
         Route::delete('{id}/destroy',[AdminController::class, 'productDestroy'])->name('destroy');
+
+
+
     });
 });
+
+
+
+
+Route::get('/pruducts-trash',[AdminController::class, 'productTrash'])->name('pruduct.trash');
+Route::get('/pruducts-restore/{id}',[AdminController::class, 'productRestore'])->name('product.restore');

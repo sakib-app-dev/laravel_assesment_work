@@ -8,7 +8,7 @@
 						<h3 class="title1">Product Form :</h3>
 						<div class="form-three widget-shadow">
 							<x-form.error/>
-							<form action="{{ route('admin.product.store') }}" method="POST">
+							<form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
 								@csrf
 								<div class="form-group">
 								  {{-- <label for="product_title">Title</label>
@@ -40,11 +40,13 @@
 									
 									$list = ['Kids' => 'Kids', 'Men' => 'Men','Women'=>'Women'];
 								@endphp
-								<x-form.select class="form-select form-select-lg mb-3 form-control" name="category"   :list=$list />
+								<x-form.select class="form-select form-select-lg mb-3 form-control" name="category" label="Category"   :list=$list />
 								
 								
 								
-								
+								<div class="form-gorup">
+									<x-form.input name='image'  type='file' label='Image'/>
+								</div>
 
 								<div class="form-check">
 								  {{-- <input type="checkbox" class="form-check-input" id="exampleCheck1" name="is_active">

@@ -1,9 +1,13 @@
 @props([
     'name' => 'name',
     'list' => [],
-    'selected'=>''
+    'selected'=>'',
+    'Label'=>''
 ])
 {{-- @dd($attributes); --}}
+@if($label)
+<label for="{{ $name }}Input" class="form-label">{{ $label }}</label>
+@endif
 <select {{ $attributes->merge(['class' => 'form-control']) }} name={{ $name }}>
 
     <option value="">Please select</option>

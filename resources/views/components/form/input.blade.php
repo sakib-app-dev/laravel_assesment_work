@@ -10,7 +10,7 @@
         type="{{ $type }}" 
         id="{{ $name }}Input" 
          
-        {{ $attributes->merge(['class' => 'form-control','value'=>' old($name)']) }}
+        {{ $attributes->merge(['class' => 'form-control','value'=>old($name)]) }}
     >
 
     @error($name)
