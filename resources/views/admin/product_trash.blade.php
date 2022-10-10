@@ -15,7 +15,7 @@
                     </div>
                     
                     <div class="col-md-8  text-right">
-                        <a href="" class="btn btn-danger">Trash</a>
+                        <a href="" class="btn btn-danger">Trash  ({{ $product->count() }})</a>
                     </div>
                     <table class="table table-bordered">
                         <thead>
@@ -39,10 +39,10 @@
                                     <td>{{ $data->description }}</td>
                                     
                                     <td>
-										<a href="{{ route('product.show',$data->id) }}" class="btn btn-primary">Show</a>
-										<a href="{{ url('/pruducts-restore/"$data->id') }}" class="btn btn-success">Restore</a>
+										<a href="{{ route('admin.product.show',$data->id) }}" class="btn btn-primary">Show</a>
+										<a href="{{ route('product.restore',$data->id) }}" class="btn btn-success">Restore</a>
 										
-                                        <form action="{{ route('admin.product.destroy',$data->id) }}" method="post">
+                                        <form action="{{ route('product.delete',$data->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger">Delete</button>

@@ -48,13 +48,18 @@ class AdminController extends Controller
         //                 ->withErrors($validator)
         //                 ->withInput();
         // }else{
-            $request->file('image') ->move(storage_path('/app/public/products'));
-            dd($request->image);
+            $orgName=$request->file('image')->getClientOriginalName();
+
+            $filename=date('Y-m-d').time().$orgName;
+           
+            $request->file('image') ->move(storage_path('/app/public/products'),$filename);
+            // dd($request->image);
             Product::create([
                 'title'=>$request->title,
                 'category'=>$request->category,
                 'is_active'=>$request->is_active ? true : false,
-                'description'=>$request->description
+                'description'=>$request->description,
+                'image'=>$filename
             ]);
         
             return redirect()
@@ -124,12 +129,20 @@ class AdminController extends Controller
     }
 
     public function productRestore($id){
-        dd($id);
+        // dd($id);
         $product=Product::onlyTrashed()->find($id);
         $product->restore();
         return redirect()
-        ->route('admin.product.trash')
+        ->route('product.trash')
         ->with('message','Restore Successfully');
+    }
+    public function productDelete($id){
+        // dd($id);
+        $product=Product::onlyTrashed()->find($id);
+        $product->forceDelete();
+        return redirect()
+        ->route('product.trash')
+        ->with('message','Delete Successfully');
     }
 
      

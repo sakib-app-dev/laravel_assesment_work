@@ -71,6 +71,7 @@
 								<div class="form-group">
 									<x-form.textarea name="description" class="form-control" id="" cols="30" rows="4" label="Description" text="{{ $product->description }}"/>
 								</div>
+								
 								<button type="submit" class="btn btn-primary">Submit</button>
 							  </form>
 						</div>
